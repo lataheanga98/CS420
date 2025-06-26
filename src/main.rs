@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 use chrono::prelude::*;
 use std::{fs, io, path::Path};
 
+mod oop_tests;
+
 #[derive(Serialize, Deserialize, Debug)]
 struct Habit {
     name: String,
@@ -36,12 +38,13 @@ fn main() {
         println!("2. Mark Habit Done Today");
         println!("3. View Habits & Dates");
         println!("4. Exit and Save");
+        println!("5. Run OOP Tests");
 
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).unwrap();
         match choice.trim() {
             "1" => {
-                println!("Enter habit name:");
+                println!("Enter Habit name:");
                 let mut name = String::new();
                 io::stdin().read_line(&mut name).unwrap();
                 habits.push(Habit::new(name.trim()));
@@ -78,6 +81,11 @@ fn main() {
                 save_habits("habits.json", &habits);
                 println!("📁 Habits saved. Goodbye!");
                 break;
+            },
+            "5" => {
+                println!("📘 Running OOP Test Programs...");
+                oop_tests::variable_inheritance::run();
+                oop_tests::method_dispatch::run();
             },
             _ => println!("❌ Invalid option. Try again."),
         }
